@@ -8,5 +8,5 @@ if [ -z "$URL" ]; then
   exit 1
 fi
 
-DATA=$(curl -o /dev/null -s -w "%{http_code}:%{time_total}" $URL)
+DATA=$(curl -o /dev/null -s -w "%{http_code} %{time_total}" $URL)
 echo $DATA
