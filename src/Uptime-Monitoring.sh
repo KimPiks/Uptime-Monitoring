@@ -4,7 +4,7 @@
 # Created On       : 17.05.2024
 # Last Modified By : Kamil Prorok ( kamilxprorok@gmail.com )
 # Last Modified On : 17.05.2024
-# Version          : 0.0.2
+# Version          : 0.0.4
 #
 # Description      : A tool for monitoring and reporting the status of websites.
 #
@@ -57,12 +57,70 @@ function check_status() {
   check_status $URL_ID
 }
 
-# Main
-for ((i = 0; i < ${#URLS[@]}; i++)); do
-  check_status $i &
+function show_help() {
+  echo "Usage: $0 [OPTION]"
+  echo "Options:"
+  echo "  -h            Display help"
+  echo "  -v            Display version"
+  echo "  -s            Show status of services"
+  echo "  -d            Start service in background"
+  echo "  -r <url>      Show last 100 logs of a specific service"
+  echo "  -n <url> -s   Show status of a specific service"
+}
+
+function show_version() {
+  VERSION=$(grep -E '^# Version[ ]*:' "$0" | cut -d ':' -f2 | tr -d ' ')
+  echo "Uptime Monitoring v$VERSION"
+}
+
+while getopts "hvdsr:n:" opt; do
+  case $opt in
+    # Script help
+    h)
+      show_help
+      exit 0
+      ;;
+    # Script version
+    v)
+      show_version
+      exit 0
+      ;;
+    n)
+      URL_PARAM=$OPTARG
+      ;;
+    # Get status of services
+    s)
+      if [ -z $URL_PARAM ]; then
+        eval $SCRIPTS_DIR/show_status.sh $LOGS_DIR
+      else
+        eval $SCRIPTS_DIR/show_status.sh $LOGS_DIR $URL_PARAM
+      fi
+      exit 0
+      ;;
+    # Show logs of a specific service
+    r)
+      URL_PARAM=$OPTARG
+      if ! [ -z $URL_PARAM ]; then
+        eval $SCRIPTS_DIR/show_status.sh $LOGS_DIR $URL_PARAM 1 
+      fi
+      exit 0
+      ;;
+    # Start service in background
+    d)
+      for ((i = 0; i < ${#URLS[@]}; i++)); do
+        check_status $i &
+      done
+
+      # Keep the script running; neccessery for systemd service
+      while [ true ]; do 
+        sleep 1 
+      done
+      ;;
+    *)
+      show_help
+      exit 0
+      ;;
+    esac
 done
 
-# Keep the script running; neccessery for systemd service
-while [ true ]; do 
-  sleep 1 
-done
+show_help
