@@ -41,6 +41,11 @@ for element in "${URLS_DATA[@]}"; do
   INTERVALS+=($(echo $element | cut -d ';' -f2))
 done
 
+if [ ${#URLS[@]} -ne ${#INTERVALS[@]} ] || [ ${#URLS[@]} -eq 0 ]; then
+  echo "URL's config file is not properly formatted."
+  exit 1
+fi
+
 # Functions
 function check_status() {
   URL_ID=$1
