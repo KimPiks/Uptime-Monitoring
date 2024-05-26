@@ -7,7 +7,7 @@ fi
 
 # Move script to /usr/bin
 echo "Installing Uptime Monitoring..."
-cp src/Uptime-Monitoring.sh /usr/bin/uptime-monitoring
+cp src/uptime-monitoring.sh /usr/bin/uptime-monitoring
 chmod +x /usr/bin/uptime-monitoring
 
 # Move includes to /usr/lib/uptime-monitoring
