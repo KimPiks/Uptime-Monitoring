@@ -2,6 +2,12 @@
 
 The uptime-monitoring tool is designed to monitor and report the status of websites. It records whether a website responds, the HTTP status it returns, and the response time. Monitoring occurs at specific intervals set in a configuration file. This tool can handle monitoring an indefinite number of websites, which are specified in the configuration file. It includes the ability to send email notifications via SMTP in case of response issues from any website and can regularly report the status of all monitored websites. Additionally, the script provides commands to track the status of services via the system terminal.
 
+<hr>
+
+<img src="https://github.com/KimPiks/Uptime-Monitoring/blob/main/img/preview.png">
+
+<hr>
+
 ## Installation
 
 1. Clone this repository
@@ -84,6 +90,14 @@ CONFIGS_DIR="/etc/uptime-monitoring"
 ```
 systemctl restart uptime-monitoring
 ```
+
+## Contributing 
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+## Support
+If you like this project, remember to leave a star! Thanks!
 
 ## License
 Check [LICENSE](https://github.com/KimPiks/Uptime-Monitoring/blob/main/LICENSE) file
