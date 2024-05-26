@@ -1,0 +1,9 @@
+[Unit]
+Description=Uptime Monitoring
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/uptime-monitoring --background
+
+[Install]
+WantedBy=multi-user.target

@@ -71,9 +71,9 @@ function validate_config() {
   done < $CONFIG
 }
 
-# Read config file
 validate_config
 
+# Read config file
 while IFS= read -r line || [ -n "$line" ];
 do
   # Skip comments

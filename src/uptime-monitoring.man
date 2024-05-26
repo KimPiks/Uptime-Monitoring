@@ -1,0 +1,90 @@
+.TH man 1 "May 2024" "uptime-monitoring 0.1.2" "uptime-monitoring man page"
+.SH NAME
+uptime-monitoring
+.SH SYNOPSIS
+uptime-monitoring [OPTIONS]... [PARAMETERS]...
+.SH DESCRIPTION
+A tool for monitoring and reporting the status of websites.
+
+The script records information about whether the website responds, what HTTP status it returns, and what the response time is. Monitoring takes place at specific time intervals set in the configuration file. It is possible to monitor the status of an indefinite number of websites. Information about which pages are to be checked can be specified in the configuration file. The script has the ability to send e-mail information via SMTP in case of problems with the response from a specific website, and can regularly report the status of all websites. The script also provides dedicated commands that allow you to track the status of services in the system terminal.
+
+.SH GETTING_STARTED
+.TP
+1. Install script
+.B sudo ./install.sh
+
+.TP
+2. If you want to receive email notifications if the service is not responding, set this up by typing the commands
+.B sudo uptime-monitoring --set-email
+
+.TP
+3. If you want connections to be made using a proxy, enter the command:
+.B sudo uptime-monitoring --add-proxy <PROXY_FILE>
+
+.I Each line of the proxy file should contain the full connection string
+
+.TP
+4. Adding service
+.B sudo uptime-monitoring --add-service
+
+.TP
+5. Remove service
+.B sudo uptime-monitoring --remove-service <SERVICE_URL>
+
+.TP
+6. To check the status, check the OPTIONS sections
+
+.SH OPTIONS
+.TP
+\fB--help\fR
+Display help.
+
+.TP
+\fB--version\fR
+Display version.
+
+.TP
+\fB--service\fR
+Show status of services.
+
+.TP
+\fB--url\fR \fI<url>\fR \fB--service\fR
+Show status of a specific service.
+
+.TP
+\fB--logs\fR \fI<url>\fR
+Show last 100 logs of a specific service.
+
+.TP
+\fB--background\fR
+Start service in background.
+
+.TP
+\fB--add-service\fR
+Add a new service.
+
+.TP
+\fB--remove-service\fR \fI<url>\fR
+Remove service.
+
+.TP
+\fB--set-email\fR
+Set email for notifications.
+
+.TP
+\fB--add-proxy\fR \fI<file>\fR
+Add proxy for service.
+
+
+.SH EXIT STATUS 
+.TP
+0: OK
+.TP
+1: Problem
+
+.SH AUTHOR
+Written by Kamil Prorok
+.SH COPYRIGHT
+GNU General Public License v3.0
+.SH REPORTING BUGS
+https://github.com/KimPiks/Uptime-Monitoring/
